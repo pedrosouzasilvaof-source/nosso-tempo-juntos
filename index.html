@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosso Caminho 🌿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#356E48;
+    --green-deep:#274f35;
+    --cream:#F5F5F5;
+    --paper:#fbf8f1;
+    --brown:#5B3320;
+    --brown-soft:#8a5a3c;
+    --gold:#c9a063;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Fraunces', serif;
+    background:var(--cream);
+    color:var(--brown);
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(53,110,72,0.06), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(91,51,32,0.07), transparent 50%);
+  }
+
+  /* subtle paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:1;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .script{font-family:'Caveat',cursive;}
+
+  /* ================= HERO ================= */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px;
+    position:relative;
+    background:linear-gradient(180deg, var(--green) 0%, var(--green-deep) 100%);
+    color:var(--paper);
+    border-radius:0 0 60px 60px;
+    overflow:hidden;
+  }
+
+  .hero::after{
+    content:"";
+    position:absolute;
+    bottom:-1px;left:0;right:0;height:120px;
+    background:radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.15) 100%);
+    pointer-events:none;
+  }
+
+  .leaf-deco{
+    position:absolute;
+    opacity:.18;
+    z-index:0;
+  }
+  .leaf-deco.tl{ top:-30px; left:-40px; width:220px; transform:rotate(-15deg);}
+  .leaf-deco.br{ bottom:-50px; right:-40px; width:260px; transform:rotate(165deg);}
+
+  .hero-eyebrow{
+    font-family:'Caveat',cursive;
+    font-size:1.6rem;
+    color:var(--gold);
+    letter-spacing:2px;
+    margin-bottom:10px;
+    z-index:2;
+  }
+
+  .hero h1{
+    font-size:clamp(2.4rem, 7vw, 4.5rem);
+    font-weight:600;
+    font-style:italic;
+    line-height:1.15;
+    margin-bottom:8px;
+    z-index:2;
+  }
+
+  .hero .since{
+    font-size:1rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    opacity:.75;
+    margin-bottom:40px;
+    z-index:2;
+  }
+
+  .counter-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
+    max-width:680px;
+    width:100%;
+    z-index:2;
+  }
+  @media (max-width:560px){
+    .counter-grid{grid-template-columns:repeat(3,1fr);}
+    .counter-grid .unit:nth-child(7){grid-column:2;}
+  }
+
+  .unit{
+    background:rgba(245,245,245,0.08);
+    border:1px solid rgba(245,245,245,0.18);
+    backdrop-filter:blur(6px);
+    border-radius:14px;
+    padding:16px 8px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    transition:transform .25s ease, background .25s ease;
+  }
+  .unit:hover{transform:translateY(-4px); background:rgba(245,245,245,0.14);}
+
+  .unit .num{
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
+    color:var(--gold);
+  }
+  .unit .label{
+    font-family:'Caveat',cursive;
+    font-size:1.05rem;
+    letter-spacing:1px;
+    opacity:.85;
+    text-transform:lowercase;
+  }
+
+  .hero-foot{
+    margin-top:46px;
+    font-family:'Caveat',cursive;
+    font-size:1.4rem;
+    opacity:.8;
+    z-index:2;
+  }
+  .hero-foot .arrow{
+    display:block;
+    margin:10px auto 0;
+    width:18px;height:18px;
+    border-right:2px solid var(--gold);
+    border-bottom:2px solid var(--gold);
+    transform:rotate(45deg);
+    animation:bob 2s infinite;
+  }
+  @keyframes bob{
+    0%,100%{transform:rotate(45deg) translate(0,0);}
+    50%{transform:rotate(45deg) translate(6px,6px);}
+  }
+
+  /* ================= TRAIL INTRO ================= */
+  .trail-intro{
+    text-align:center;
+    padding:90px 20px 30px;
+    position:relative;
+    z-index:2;
+  }
+  .trail-intro h2{
+    font-size:clamp(1.8rem,5vw,3rem);
+    font-style:italic;
+    color:var(--brown);
+    margin-bottom:14px;
+  }
+  .trail-intro p{
+    font-family:'Caveat',cursive;
+    font-size:1.4rem;
+    color:var(--brown-soft);
+    max-width:480px;
+    margin:0 auto;
+  }
+
+  /* ================= TRAIL ================= */
+  .trail{
+    position:relative;
+    max-width:1100px;
+    margin:0 auto;
+    padding:40px 20px 100px;
+  }
+
+  .trail-line{
+    position:absolute;
+    top:0; bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:4px;
+    z-index:0;
+  }
+  .trail-line svg{ display:block; height:100%; }
+
+  .stop{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 70px 1fr;
+    align-items:center;
+    gap:0 28px;
+    margin:70px 0;
+    z-index:1;
+  }
+  .stop:nth-child(even) .photo-wrap{ order:3; }
+  .stop:nth-child(even) .caption-wrap{ order:1; text-align:right;}
+  .stop:nth-child(odd) .caption-wrap{ order:3; }
+  .stop:nth-child(even) .marker{ order:2;}
+  .stop:nth-child(odd) .marker{ order:2;}
+  .stop:nth-child(odd) .photo-wrap{ order:1; }
+
+  .marker{
+    width:70px;height:70px;
+    display:flex;align-items:center;justify-content:center;
+    z-index:2;
+  }
+  .marker .dot{
+    width:18px;height:18px;
+    border-radius:50%;
+    background:var(--gold);
+    border:4px solid var(--cream);
+    box-shadow:0 0 0 2px var(--green);
+  }
+
+  .photo-wrap{
+    display:flex;
+    justify-content:center;
+  }
+  .polaroid{
+    background:var(--paper);
+    padding:14px 14px 46px;
+    box-shadow:0 14px 30px -10px rgba(91,51,32,0.35), 0 2px 6px rgba(91,51,32,0.15);
+    border-radius:4px;
+    max-width:340px;
+    width:100%;
+    position:relative;
+    transition:transform .35s ease, box-shadow .35s ease;
+  }
+  .polaroid:hover{
+    transform:scale(1.035) rotate(0deg) !important;
+    box-shadow:0 22px 40px -12px rgba(91,51,32,0.4);
+  }
+  .polaroid img, .polaroid video{
+    width:100%;
+    display:block;
+    border-radius:2px;
+    object-fit:cover;
+    aspect-ratio:4/5;
+    background:#eee;
+  }
+  .stop:nth-child(odd) .polaroid{ transform:rotate(-3deg); }
+  .stop:nth-child(even) .polaroid{ transform:rotate(2.5deg); }
+
+  .tape{
+    position:absolute;
+    top:-12px;
+    width:70px;height:24px;
+    background:rgba(201,160,99,0.55);
+    box-shadow:0 1px 2px rgba(0,0,0,0.1);
+  }
+  .stop:nth-child(odd) .tape{ left:50%; transform:translateX(-50%) rotate(-4deg);}
+  .stop:nth-child(even) .tape{ right:24px; transform:rotate(5deg);}
+
+  .caption-wrap{
+    display:flex;
+    align-items:center;
+  }
+  .stop:nth-child(even) .caption-wrap{ justify-content:flex-end; }
+
+  .note{
+    font-family:'Caveat',cursive;
+    font-size:clamp(1.3rem, 2.6vw, 1.7rem);
+    line-height:1.35;
+    color:var(--brown);
+    max-width:320px;
+    position:relative;
+    padding:6px 4px;
+  }
+  .note .day{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-size:.75rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--green);
+    font-style:normal;
+    margin-bottom:6px;
+    opacity:.8;
+  }
+
+  @media (max-width:760px){
+    .stop{
+      grid-template-columns:50px 1fr;
+      gap:14px 16px;
+    }
+    .marker{ width:50px; }
+    .stop:nth-child(odd) .marker, .stop:nth-child(even) .marker{ order:1 !important; }
+    .stop:nth-child(odd) .photo-wrap, .stop:nth-child(even) .photo-wrap{ order:2 !important; grid-column:2;}
+    .stop:nth-child(odd) .caption-wrap, .stop:nth-child(even) .caption-wrap{
+      order:3 !important; grid-column:2; justify-content:flex-start !important; text-align:left !important; margin-top:14px;
+    }
+    .trail-line{ left:25px; }
+  }
+
+  /* reveal animation */
+  .stop{
+    opacity:0;
+    transform:translateY(40px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .stop.visible{ opacity:1; transform:translateY(0); }
+
+  /* ================= LETTER ================= */
+  .letter-section{
+    background:var(--green);
+    border-radius:60px 60px 0 0;
+    color:var(--paper);
+    text-align:center;
+    padding:100px 20px 120px;
+    position:relative;
+    overflow:hidden;
+  }
+  .letter-section .leaf-deco{ opacity:.15; }
+  .letter-section h2{
+    font-size:clamp(2rem,6vw,3.4rem);
+    font-style:italic;
+    margin-bottom:12px;
+    z-index:2;
+  }
+  .letter-section .sub{
+    font-family:'Caveat',cursive;
+    font-size:1.4rem;
+    opacity:.8;
+    margin-bottom:50px;
+    z-index:2;
+  }
+
+  .envelope{
+    position:relative;
+    width:min(90vw, 340px);
+    margin:0 auto;
+    cursor:pointer;
+    z-index:2;
+    user-select:none;
+  }
+  .envelope-body{
+    background:var(--paper);
+    border-radius:8px;
+    height:220px;
+    position:relative;
+    box-shadow:0 20px 50px -15px rgba(0,0,0,0.45);
+    overflow:hidden;
+  }
+  .envelope-body::before, .envelope-body::after{
+    content:"";
+    position:absolute;
+    width:0;height:0;
+    border-style:solid;
+  }
+  .flap{
+    position:absolute;
+    top:0;left:0;right:0;
+    height:0;
+    border-left:170px solid transparent;
+    border-right:170px solid transparent;
+    border-top:120px solid var(--gold);
+    transform-origin:top;
+    transition:transform .6s cubic-bezier(.6,.2,.2,1);
+    z-index:3;
+  }
+  .envelope.open .flap{
+    transform:rotateX(180deg);
+  }
+  .seal{
+    position:absolute;
+    top:90px;left:50%;
+    transform:translate(-50%,-50%);
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--brown);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--paper);
+    font-size:1.4rem;
+    z-index:4;
+    box-shadow:0 4px 10px rgba(0,0,0,0.25);
+    transition:opacity .3s ease;
+  }
+  .envelope.open .seal{ opacity:0; }
+
+  .letter-paper{
+    position:absolute;
+    bottom:8px; left:50%;
+    transform:translate(-50%, 30%);
+    width:88%;
+    background:var(--cream);
+    border-radius:4px;
+    padding:24px 18px;
+    box-shadow:0 -4px 14px rgba(0,0,0,0.12);
+    text-align:left;
+    color:var(--brown);
+    font-family:'Caveat',cursive;
+    font-size:1.25rem;
+    line-height:1.5;
+    min-height:160px;
+    transition:transform .7s cubic-bezier(.5,0,.2,1.4) .15s, opacity .5s ease .15s;
+    opacity:0;
+    z-index:2;
+  }
+  .envelope.open .letter-paper{
+    transform:translate(-50%, 8%);
+    opacity:1;
+  }
+
+  .hint{
+    margin-top:26px;
+    font-family:'Caveat',cursive;
+    font-size:1.2rem;
+    opacity:.7;
+    z-index:2;
+  }
+
+  footer{
+    text-align:center;
+    padding:34px 20px;
+    background:var(--green-deep);
+    color:rgba(245,245,245,.6);
+    font-family:'Caveat',cursive;
+    font-size:1.1rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO / CONTADOR ============ -->
+<section class="hero">
+  <svg class="leaf-deco tl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 10 C150 40 190 90 100 190 C10 90 50 40 100 10 Z" fill="#F5F5F5"/>
+    <path d="M100 20 C100 80 100 140 100 185" stroke="#356E48" stroke-width="2"/>
+  </svg>
+  <svg class="leaf-deco br" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 10 C150 40 190 90 100 190 C10 90 50 40 100 10 Z" fill="#F5F5F5"/>
+    <path d="M100 20 C100 80 100 140 100 185" stroke="#356E48" stroke-width="2"/>
+  </svg>
+
+  <div class="hero-eyebrow">desde aquele dia ✦</div>
+  <h1>Nosso tempo juntos</h1>
+  <div class="since">02 de dezembro de 2024</div>
+
+  <div class="counter-grid" id="counter">
+    <div class="unit"><span class="num" id="c-years">0</span><span class="label">anos</span></div>
+    <div class="unit"><span class="num" id="c-months">0</span><span class="label">meses</span></div>
+    <div class="unit"><span class="num" id="c-weeks">0</span><span class="label">semanas</span></div>
+    <div class="unit"><span class="num" id="c-days">0</span><span class="label">dias</span></div>
+    <div class="unit"><span class="num" id="c-hours">0</span><span class="label">horas</span></div>
+    <div class="unit"><span class="num" id="c-minutes">0</span><span class="label">minutos</span></div>
+    <div class="unit"><span class="num" id="c-seconds">0</span><span class="label">segundos</span></div>
+  </div>
+
+  <div class="hero-foot">
+    e cada segundo continua valendo a pena
+    <span class="arrow"></span>
+  </div>
+</section>
+
+<!-- ============ INTRODUÇÃO DA TRILHA ============ -->
+<section class="trail-intro">
+  <h2>Um caminho de momentos</h2>
+  <p>Cada parada dessa trilha é um pedacinho da nossa história até aqui.</p>
+</section>
+
+<!-- ============ TRILHA DE FOTOS ============ -->
+<section class="trail">
+  <div class="trail-line">
+    <svg width="4" height="100%" viewBox="0 0 4 100" preserveAspectRatio="none">
+      <line x1="2" y1="0" x2="2" y2="100" stroke="#5B3320" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+
+  <!-- 1 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/IMG_8789.jpg" alt="Selfie no corredor da faculdade" loading="lazy">
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">corredores da facite</span>Entre uma aula e outra, sempre dá tempo pra um clique nosso. Você é o melhor intervalo do meu dia.</p>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <video src="assets/IMG_8006.mp4" muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">manhã qualquer, em casa</span>Toalha na cabeça, sorriso de sempre. Não precisa de motivo nenhum pra você ser a parte boa do meu dia.</p>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/IMG_8043.jpg" alt="Chamada de vídeo entre nós" loading="lazy">
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">ligação de 00:20</span>Mesmo a quilômetros de distância, vinte minutos de chamada já bastam pra encher o dia de você.</p>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/IMG_7952.jpg" alt="Abraço de perto" loading="lazy">
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">um abraço de lado</span>Esse seu jeitinho de espiar a câmera no meio do abraço... é nesse colo que eu encontro meu lugar mais seguro.</p>
+    </div>
+  </article>
+
+  <!-- 5 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/IMG_8397.jpg" alt="Casal arrumado para uma noite especial" loading="lazy">
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">noite especial</span>Arrumadinhos, sorrindo, prontos pra mais uma memória boa pra guardar.</p>
+    </div>
+  </article>
+
+  <!-- 6 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/IMG_8447.jpg" alt="Quase um beijo" loading="lazy">
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">segundos antes</span>Nesse instante antes do beijo, o mundo todo parece dar uma pausa só pra gente.</p>
+    </div>
+  </article>
+
+  <!-- 7 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/IMG_9486_JPG.jpg" alt="Um beijo" loading="lazy">
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">e então, o beijo</span>Simples, gostoso, nosso. Desses que a gente queria poder pausar pra sempre.</p>
+    </div>
+  </article>
+
+  <!-- 8 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/IMG_9483_JPG.jpg" alt="Cabeça encostada na sua" loading="lazy">
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">deitados, sem pressa</span>Cabeça encostada na sua, sorrindo de boca fechada... os melhores momentos sempre são os mais bobos.</p>
+    </div>
+  </article>
+
+  <!-- 9 -->
+  <article class="stop">
+    <div class="photo-wrap">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/IMG_8010.jpg" alt="Selfie no escurinho" loading="lazy">
+      </div>
+    </div>
+    <div class="marker"><span class="dot"></span></div>
+    <div class="caption-wrap">
+      <p class="note"><span class="day">no escurinho do quarto</span>Até sem luz nenhuma, esse seu sorriso continua sendo a coisa mais bonita que eu já vi.</p>
+    </div>
+  </article>
+
+</section>
+
+<!-- ============ CARTA ============ -->
+<section class="letter-section">
+  <svg class="leaf-deco tl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="top:20px;left:20px;width:160px;">
+    <path d="M100 10 C150 40 190 90 100 190 C10 90 50 40 100 10 Z" fill="#F5F5F5"/>
+  </svg>
+  <svg class="leaf-deco br" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="bottom:10px;right:10px;width:180px;">
+    <path d="M100 10 C150 40 190 90 100 190 C10 90 50 40 100 10 Z" fill="#F5F5F5"/>
+  </svg>
+
+  <h2>Pra você, com carinho</h2>
+  <p class="sub">tem uma cartinha esperando aqui</p>
+
+  <div class="envelope" id="envelope">
+    <div class="envelope-body">
+      <div class="letter-paper">
+        <em>(espaço reservado)</em><br><br>
+        Essa é só uma versão de teste do site — em breve essa cartinha vai virar a carta de amor de verdade, escrita especialmente pra você. 💌
+      </div>
+      <div class="flap"></div>
+    </div>
+    <div class="seal">♥</div>
+  </div>
+
+  <p class="hint">toque no envelope pra abrir</p>
+</section>
+
+<footer>feito com carinho pra você, 02.12.2024 ♡</footer>
+
+<script>
+  // contador
+  const start = new Date(2024, 11, 2, 0, 0, 0); // 02/12/2024
+
+  function update(){
+    const now = new Date();
+
+    // anos e meses (base calendário)
+    let years = now.getFullYear() - start.getFullYear();
+    let months = now.getMonth() - start.getMonth();
+    if (now.getDate() < start.getDate()) months--;
+    if (months < 0) { years--; months += 12; }
+
+    // data "aniversário" mais recente (mesmo dia, anos+meses depois)
+    const anniversary = new Date(start.getFullYear() + years, start.getMonth() + months, start.getDate(), start.getHours(), start.getMinutes(), start.getSeconds());
+    let diff = now - anniversary; // ms desde o último "aniversário mensal"
+
+    let totalSeconds = Math.floor(diff / 1000);
+    let totalMinutes = Math.floor(totalSeconds / 60);
+    let totalHours = Math.floor(totalMinutes / 60);
+    let totalDays = Math.floor(totalHours / 24);
+
+    const seconds = totalSeconds % 60;
+    const minutes = totalMinutes % 60;
+    const hours = totalHours % 24;
+    const weeks = Math.floor(totalDays / 7);
+    const days = totalDays % 7;
+
+    document.getElementById('c-years').textContent = years;
+    document.getElementById('c-months').textContent = months;
+    document.getElementById('c-weeks').textContent = weeks;
+    document.getElementById('c-days').textContent = days;
+    document.getElementById('c-hours').textContent = hours;
+    document.getElementById('c-minutes').textContent = minutes;
+    document.getElementById('c-seconds').textContent = seconds;
+  }
+  update();
+  setInterval(update, 1000);
+
+  // reveal on scroll
+  const stops = document.querySelectorAll('.stop');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.2 });
+  stops.forEach(s => obs.observe(s));
+
+  // envelope
+  const envelope = document.getElementById('envelope');
+  envelope.addEventListener('click', () => envelope.classList.toggle('open'));
+
+  // play videos on hover (and on visible for mobile)
+  document.querySelectorAll('.polaroid video').forEach(v => {
+    v.addEventListener('mouseenter', () => v.play());
+    v.addEventListener('mouseleave', () => v.pause());
+    const vObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) v.play(); else v.pause(); });
+    }, { threshold: 0.6 });
+    vObs.observe(v);
+  });
+</script>
+
+</body>
+</html>
